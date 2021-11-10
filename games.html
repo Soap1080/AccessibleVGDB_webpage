@@ -25,7 +25,48 @@ https://templatemo.com/tm-529-ramayana
     <link rel="stylesheet" href="assets/css/owl.css">
 
   </head>
-
+<script>
+function createSection(name, description) {
+	var section = document.createElement("section");
+	section.className ="left-image";
+	
+	var div1 = document.createElement("div");
+	div1.className ="container-fluid";
+	section.appendChild(div1)
+	
+	var div2 = document.createElement("div");
+	div2.className ="row";
+	div1.appendChild(div2)
+	
+	var div3 = document.createElement("div");
+	div3.className ="col-md-6";
+	div2.appendChild(div3)
+	
+	var img = document.createElement("img");
+	img.src ="assets/images/cover/cover.jpg";
+	div3.appendChild(img)
+	
+	var div4 = document.createElement("div");
+	div4.className ="col-md-6";
+	div2.appendChild(div4)
+	
+	var div5 = document.createElement("div");
+	div5.className ="right-content";
+	div4.appendChild(div5)
+	
+	var title = document.createElement("h4");
+	const node1 = document.createTextNode(name);
+	title.appendChild(node1);
+	div5.appendChild(title);
+	
+	var desc = document.createElement("p");
+	const node2 = document.createTextNode(description);
+	desc.appendChild(node2);
+	div5.appendChild(desc);
+	
+	return section;
+}
+</script>
 <body class="is-preload">
 
     <!-- Wrapper -->
@@ -53,40 +94,45 @@ https://templatemo.com/tm-529-ramayana
 						
 						const element = document.getElementById("gameTitle");
 						
-						var tag = document.createElement("h1");
+						var tagSearch = document.createElement("h1");
 						var text;
 						
 						if(params.search!=null && params.search.length>0){
 							text = document.createTextNode("Searching for "+params.search+":");
+							
+							var textNElements = document.createTextNode("Elements: "+1);
+							var tagElements = document.createElement("hr");
+							tagElements.appendChild(textNElements);
 						}else if(params.cat!=null && params.cat.length>0){
 							var value=params.cat.replaceAll("_"," ");
 							var cat=value.split("/")[0];
 							var catVal=value.split("/")[1];
 							text = document.createTextNode("Category ("+cat+"="+catVal+"):");
+							
+							var textNElements = document.createTextNode("Elements: "+2);
+							var tagElements = document.createElement("hr");
+							tagElements.appendChild(textNElements);
 						}else if(params.game!=null && params.game.length>0){
 							var value=params.game.replaceAll("_"," ");
 							text = document.createTextNode("Game: "+value+":");
+							
+							var textNElements = document.createTextNode("");
+							var tagElements = document.createElement("hr");
+							tagElements.appendChild(textNElements);
 						}else text = document.createTextNode("Invalid Search");
-						tag.appendChild(text);
-					    element.appendChild(tag);
+						tagSearch.appendChild(text);
+						
+					    element.appendChild(tagSearch);
+						element.appendChild(tagElements);
+						for (var i = 0; i < 2; i++) {
+							var tagSection = createSection("Name Value","Description value");
+							element.appendChild(tagSection);
+						}
 					</script>
-					<p>Elements: 6<p/>
-					<hr>
                   </div>
                 </div>
               </div>
-            </div> 
-			
-            <section class="simple-post">
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-12", id="gamesBox">
-					<p>test</p>
-                  </div>
-                </div>
-              </div>
-            </section>
-			
+            </div>
 		  </div>
         </div>
 
@@ -234,7 +280,6 @@ https://templatemo.com/tm-529-ramayana
     <script src="assets/js/owl-carousel.js"></script>
     <script src="assets/js/custom.js"></script>
 </body>
-
 
   </body>
 
