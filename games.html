@@ -56,8 +56,17 @@ https://templatemo.com/tm-529-ramayana
 						var tag = document.createElement("h1");
 						var text;
 						
-						if(params.search!=null) text = document.createTextNode("Searching for "+params.search+":");
-						else text = document.createTextNode("Games: ");
+						if(params.search!=null && params.search.length>0){
+							text = document.createTextNode("Searching for "+params.search+":");
+						}else if(params.cat!=null && params.cat.length>0){
+							var value=params.cat.replaceAll("_"," ");
+							var cat=value.split("/")[0];
+							var catVal=value.split("/")[1];
+							text = document.createTextNode("Category ("+cat+"="+catVal+"):");
+						}else if(params.game!=null && params.game.length>0){
+							var value=params.game.replaceAll("_"," ");
+							text = document.createTextNode("Game: "+value+":");
+						}else text = document.createTextNode("Invalid Search");
 						tag.appendChild(text);
 					    element.appendChild(tag);
 					</script>
@@ -98,54 +107,83 @@ https://templatemo.com/tm-529-ramayana
               <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About project</a></li>
-				<br>SEARCH TOOLS
-                <li><a href="shortcodes.html">Shortcodes</a></li>
+				<br>GENERAL SEARCH
                 <li>
-                  <span class="opener">Dropdown One</span>
+                  <span class="opener">Platform</span>
                   <ul>
-                    <li><a href="#">First Sub Menu</a></li>
-                    <li><a href="#">Second Sub Menu</a></li>
-                    <li><a href="#">Third Sub Menu</a></li>
+                    <li><a href="games.html?cat=Platform/PS4">PS4</a></li>
+                    <li><a href="games.html?cat=Platform/PS5">PS5</a></li>
+                    <li><a href="games.html?cat=Platform/Xbox_One">Xbox One</a></li>
+					<li><a href="games.html?cat=Platform/Xbox_Series_X">Xbox Series X/S</a></li>
+					<li><a href="games.html?cat=Platform/PC">PC</a></li>
                   </ul>
                 </li>
                 <li>
-                  <span class="opener">Dropdown Two</span>
+                  <span class="opener">Genre</span>
                   <ul>
-                    <li><a href="#">Sub Menu #1</a></li>
-                    <li><a href="#">Sub Menu #2</a></li>
-                    <li><a href="#">Sub Menu #3</a></li>
+                    <li><a href="games.html?cat=Genre/Action">Action</a></li>
+					<li><a href="games.html?cat=Genre/Adventure">Adventure</a></li>
+					<li><a href="games.html?cat=Genre/Fighting">Fighting</a></li>
+					<li><a href="games.html?cat=Genre/Horror">Horror</a></li>
+					<li><a href="games.html?cat=Genre/Platformer">Platformer</a></li>
+                    <li><a href="games.html?cat=Genre/Survival">Survival</a></li>
+                    <li><a href="games.html?cat=Genre/Sandbox">Sandbox</a></li>
+					
                   </ul>
                 </li>
-                <li><a href="https://www.google.com">External Link</a></li>
+                <li>
+                  <span class="opener">Pegi</span>
+                  <ul>
+                    <li><a href="games.html?cat=Pegi/3">Pegi 3</a></li>
+					<li><a href="games.html?cat=Pegi/7">Pegi 7</a></li>
+					<li><a href="games.html?cat=Pegi/12">Pegi 12</a></li>
+                    <li><a href="games.html?cat=Pegi/16">Pegi 16</a></li>
+                    <li><a href="games.html?cat=Pegi/18">Pegi 18</a></li>
+                  </ul>
+                </li>
+				<br>ACCESIBILITY SEARCH
+                <li>
+                  <span class="opener">Colorblind</span>
+                  <ul>
+                    <li><a href="games.html?cat=Colorblind/None">None</a></li>
+					<li><a href="games.html?cat=Colorblind/Deuteranopia">Deuteranopia</a></li>
+					<li><a href="games.html?cat=Colorblind/Protanopia">Protanopia</a></li>
+                    <li><a href="games.html?cat=Colorblind/Tritanopia">Tritanopia</a></li>
+                    <li><a href="games.html?cat=Colorblind/Monochromacy">Monochromacy</a></li>
+                  </ul>
+                </li>
+				<li>
+                  <span class="opener">Controller custom</span>
+                  <ul>
+                    <li><a href="games.html?cat=Controler_Custom/Full">Full</a></li>
+					<li><a href="games.html?cat=Controler_Custom/None">None</a></li>
+                  </ul>
+                </li>
+				<li>
+                  <span class="opener">Keyboard/Mouse Rebinding</span>
+                  <ul>
+                    <li><a href="games.html?cat=Keyboard+Mouse+Rebinding/Full">Full</a></li>
+					<li><a href="games.html?cat=Keyboard+Mouse+Rebinding/Fixed">Fixed</a></li>
+                  </ul>
+                </li>
+				<li>
+                  <span class="opener">Narrator</span>
+                  <ul>
+                    <li><a href="games.html?cat=Narrator/None">None</a></li>
+					<li><a href="games.html?cat=Narrator/InGame_Text">In-Game Text</a></li>
+					<li><a href="games.html?cat=Narrator/Menu">Menu</a></li>
+					<li><a href="games.html?cat=Narrator/Gameplay">Gameplay</a></li>
+                  </ul>
+                </li>
+				<li>
+                  <span class="opener">Subtitles</span>
+                  <ul>
+                    <li><a href="games.html?cat=Subtitles/Yes">Yes</a></li>
+					<li><a href="games.html?cat=Subtitles/No">No</a></li>
+                  </ul>
+                </li>
               </ul>
             </nav>
-
-            <!-- Featured Posts -->
-            <div class="featured-posts">
-              <div class="heading">
-                <h2>Featured Games</h2>
-              </div>
-              <div class="owl-carousel owl-theme">
-                <a href="#">
-                  <div class="featured-item">
-                    <img src="assets/images/FEAT_MFS.webp" alt="featured one">
-                    <p><strong>Microsoft Flight Simulator</strong> The World is at your Fingertips.</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="featured-item">
-                    <img src="assets/images/FEAT_DBFZ.gif" alt="featured two">
-                    <p><strong>Dragon Ball FighterZ</strong> is a 2.5D fighting game, based on the Dragon Ball franchise.</p>
-                  </div>
-                </a>
-                <a href="#">
-                  <div class="featured-item">
-                    <img src="assets/images/FEAT_HUNT.gif" alt="featured three">
-                    <p><strong>Hunt: Showdown</strong> "The best Multiplayer-Shooter 2019 so far” 89% – Gamestar</p>
-                  </div>
-                </a>
-              </div>
-            </div>
 
             <!-- Footer -->
             <footer id="footer">
