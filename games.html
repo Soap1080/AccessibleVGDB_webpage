@@ -58,28 +58,7 @@ function createSection(name, description) {
 	return section;
 }
 
-async function postData3(url = '', data = {}) {
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  return response.json();
-}
-
-async function searchPerNom(nom) {
-  const url = "http://localhost:9200/games/_search?q=Name:"+nom
-  const response = await fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  });
-  return response.json();
-}
-
-async function searchPerCategoria(cat,catVal) {
+async function querybdd(cat,catVal) {
   const url = "http://localhost:9200/games/_search?q="+cat+":"+catVal
   const response = await fetch(url, {
     method: 'GET',
@@ -137,7 +116,9 @@ function asignaText(value, titleSearch){
 						const params = Object.fromEntries(urlSearchParams.entries());
 
 						if(params.search!=null && params.search.length>0){
-							searchPerNom(params.search).then(data => {
+							var value = params.search.replaceAll("_","+");
+							querybdd("Name",value).then(data => {
+								
 								asignaText(data.hits.hits,"Searching for "+params.search);
 							});
 						}else if(params.cat!=null && params.cat.length>0){
@@ -145,12 +126,12 @@ function asignaText(value, titleSearch){
 							var cat=value.split("/")[0];
 							var catVal=value.split("/")[1];
 							
-							searchPerCategoria(cat,catVal).then(data => {
+							querybdd(cat,catVal).then(data => {
 								asignaText(data.hits.hits,"Searching for "+params.cat);
 							});
 						}else if(params.game!=null && params.game.length>0){
 							var value=params.game.replaceAll("_"," ");
-							searchPerNom(value).then(data => {
+							querybdd("Name",value).then(data => {
 								asignaText(data.hits.hits,"Searching for "+value);
 							});
 						}else text = document.createTextNode("Invalid Search");
