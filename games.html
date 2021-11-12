@@ -33,8 +33,9 @@ function createSection(name, description) {
 	div3.className ="col-md-6";
 	div2.appendChild(div3)
 	
+	console.log(description.Image);
 	var img = document.createElement("img");
-	img.src ="assets/images/cover/cover.jpg";
+	img.src ="assets/images/cover/"+description.Image;
 	div3.appendChild(img)
 	
 	var div4 = document.createElement("div");
@@ -51,7 +52,7 @@ function createSection(name, description) {
 	div5.appendChild(title);
 	
 	var desc = document.createElement("p");
-	const node2 = document.createTextNode(description);
+	const node2 = document.createTextNode(JSON.stringify(description, null, 2));
 	desc.appendChild(node2);
 	div5.appendChild(desc);
 	
@@ -83,8 +84,7 @@ function asignaText(value, titleSearch){
 	element.appendChild(tagSearch);
 	element.appendChild(tagElements);
 	for (var i = 0; i < elements; i++) {
-		var description = JSON.stringify(value[i]._source, null, 2); 
-		var tagSection = createSection(value[i]._source.Name,description);
+		var tagSection = createSection(value[i]._source.Name,value[i]._source);
 		element.appendChild(tagSection);
 	}
 }
@@ -116,16 +116,14 @@ function asignaText(value, titleSearch){
 						const params = Object.fromEntries(urlSearchParams.entries());
 
 						if(params.search!=null && params.search.length>0){
-							var value = params.search.replaceAll("_","+");
+							var value = params.search.replaceAll(" ","+");
 							querybdd("Name",value).then(data => {
-								
 								asignaText(data.hits.hits,"Searching for "+params.search);
 							});
 						}else if(params.cat!=null && params.cat.length>0){
 							var value=params.cat.replaceAll("_"," ");
 							var cat=value.split("/")[0];
 							var catVal=value.split("/")[1];
-							
 							querybdd(cat,catVal).then(data => {
 								asignaText(data.hits.hits,"Searching for "+params.cat);
 							});
@@ -134,8 +132,7 @@ function asignaText(value, titleSearch){
 							querybdd("Name",value).then(data => {
 								asignaText(data.hits.hits,"Searching for "+value);
 							});
-						}else text = document.createTextNode("Invalid Search");
-						
+						}else asignaText([],"Invalid Search");
 					</script>
                   </div>
                 </div>
