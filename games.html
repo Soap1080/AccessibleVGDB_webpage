@@ -55,8 +55,31 @@ function createSection(name, description) {
 	div5.appendChild(title);
 	
 	var desc = document.createElement("p");
-	const node2 = document.createTextNode(JSON.stringify(description, null, 2));
-	desc.appendChild(node2);
+
+	const desc_Platform = document.createTextNode("Platform: "+description.Platform);
+	const desc_Genre = document.createTextNode("Genre: "+description.Genre);
+	const desc_PEGI = document.createTextNode("PEGI: "+description.PEGI);
+	const desc_Acc_Colorblind = document.createTextNode("Colorblind: "+description.Accesibility.Colorblind);
+	const desc_Acc_ControlerCustom = document.createTextNode("Controler Custom: "+description.Accesibility.ControlerCustom);
+	const desc_Acc_KeyboardMouseRebinding = document.createTextNode("Keyboard/Mouse Rebinding: "+description.Accesibility.KeyboardMouseRebinding);
+	const desc_Acc_Narrator = document.createTextNode("Narrator: "+description.Accesibility.Narrator);
+	const desc_Acc_Subtitles = document.createTextNode("Subtitles: "+description.Accesibility.Subtitles);
+	
+	desc.appendChild(desc_Platform);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_Genre);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_PEGI);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_Acc_Colorblind);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_Acc_ControlerCustom);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_Acc_KeyboardMouseRebinding);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_Acc_Narrator);
+	desc.appendChild(document.createElement("br"));
+	desc.appendChild(desc_Acc_Subtitles);
 	div5.appendChild(desc);
 	
 	return section;
