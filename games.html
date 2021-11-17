@@ -33,10 +33,13 @@ function createSection(name, description) {
 	div3.className ="col-md-6";
 	div2.appendChild(div3)
 	
-	console.log(description.Image);
 	var img = document.createElement("img");
-	img.src ="assets/images/cover/"+description.Image;
+	img.src =description.ImageURL;
 	div3.appendChild(img)
+	
+	img.onerror = function(e) {
+		img.src ="assets/images/cover/cover.jpg";
+	};
 	
 	var div4 = document.createElement("div");
 	div4.className ="col-md-6";
@@ -167,6 +170,7 @@ function asignaText(value, titleSearch){
                     <li><a href="games.html?cat=Platform/Xbox_One">Xbox One</a></li>
 					<li><a href="games.html?cat=Platform/Xbox_Series_X">Xbox Series X/S</a></li>
 					<li><a href="games.html?cat=Platform/PC">PC</a></li>
+					<li><a href="games.html?cat=Platform/Android">Android</a></li>
                   </ul>
                 </li>
                 <li>
@@ -179,7 +183,7 @@ function asignaText(value, titleSearch){
 					<li><a href="games.html?cat=Genre/Platformer">Platformer</a></li>
                     <li><a href="games.html?cat=Genre/Survival">Survival</a></li>
                     <li><a href="games.html?cat=Genre/Sandbox">Sandbox</a></li>
-					
+					<li><a href="games.html?cat=Genre/Sandbox">Shooter</a></li>
                   </ul>
                 </li>
                 <li>
