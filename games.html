@@ -85,8 +85,8 @@ function createSection(name, description) {
 	return section;
 }
 
-async function querybdd(cat,catVal) {
-  const url = "http://localhost:9200/games/_search?q="+cat+":"+catVal
+async function querybdd(queryValue) {
+  const url = "http://localhost:9200/games/_search?q="+queryValue;
   const response = await fetch(url, {
     method: 'GET',
     headers: {
@@ -143,20 +143,24 @@ function asignaText(value, titleSearch){
 
 						if(params.search!=null && params.search.length>0){
 							var value = params.search.replaceAll(" ","+");
-							querybdd("Name",value).then(data => {
+							querybdd("(Name:"+value+"~3) | (Name:*"+value+"~3) | (Name:"+value+"*~3) | (Name:*"+value+"*~3)&sort=Name.keyword:asc").then(data => {
 								asignaText(data.hits.hits,"Searching for "+params.search);
 							});
 						}else if(params.cat!=null && params.cat.length>0){
 							var value=params.cat.replaceAll("_"," ");
 							var cat=value.split("/")[0];
 							var catVal=value.split("/")[1];
-							querybdd(cat,catVal).then(data => {
+							querybdd(cat+":"+catVal+"&sort=Name.keyword:asc").then(data => {
 								asignaText(data.hits.hits,"Searching for "+params.cat);
 							});
 						}else if(params.game!=null && params.game.length>0){
 							var value=params.game.replaceAll("_"," ");
-							querybdd("Name",value).then(data => {
+							querybdd("Name"+":"+value+"&sort=Name.keyword:asc").then(data => {
 								asignaText(data.hits.hits,"Searching for "+value);
+							});
+						}else if(params.all!=null){
+							querybdd("*&sort=Name.keyword:asc").then(data => {
+								asignaText(data.hits.hits,"All games");
 							});
 						}else asignaText([],"Invalid Search");
 					</script>
@@ -184,7 +188,8 @@ function asignaText(value, titleSearch){
               <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About project</a></li>
-				<br>GENERAL SEARCH
+				<li><a href="games.html?all">All games</a></li>
+				<br>GENERAL FILTERS
                 <li>
                   <span class="opener">Platform</span>
                   <ul>
@@ -224,7 +229,7 @@ function asignaText(value, titleSearch){
                     <li><a href="games.html?cat=PEGI/18">Pegi 18</a></li>
                   </ul>
                 </li>
-				<br>ACCESIBILITY SEARCH
+				<br>ACCESIBILITY FILTERS
                 <li>
                   <span class="opener">Colorblind</span>
                   <ul>
