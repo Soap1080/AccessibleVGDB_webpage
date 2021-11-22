@@ -86,7 +86,7 @@ function createSection(name, description) {
 }
 
 async function querybdd(queryValue) {
-  const url = "http://localhost:9200/games/_search?q="+queryValue;
+  const url = "http://localhost:9200/games/_search?q="+queryValue+"&size=300";
   const response = await fetch(url, {
     method: 'GET',
     headers: {
